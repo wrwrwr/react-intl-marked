@@ -1,7 +1,7 @@
 react-intl-marked
 =================
 
-When you need some message styling defined in the same place as the message.
+When you need some message structure defined in the same place as the message.
 
 Example
 -------
