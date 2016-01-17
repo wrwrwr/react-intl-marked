@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>react-intl-marked browser setup test</title>
+    </head>
+    <body>
+        <div id="react-root"></div>
+        <script src="../node_modules/react/dist/react.js"></script>
+        <script src="../node_modules/react-dom/dist/react-dom.js"></script>
+        <script src="../node_modules/react-intl/dist/react-intl.js"></script>
+        <script src="../node_modules/react-intl/dist/locale-data/en.js"></script>
+        <script src="../node_modules/react-intl-ns/dist/main.es5.js"></script>
+        <script src="../dist/main.es5.js"></script>
+        <script>
+            var messages = {id: "Hello |{name}|!|br|How are you today?"};
+            var m = ReactIntlNs.intlShortcuts().m;
+            ReactDOM.render(
+                React.createElement(ReactIntl.IntlProvider,
+                                    {locale: 'en', messages: messages},
+                    m('id', {name: "Winston"})),
+                document.getElementById('react-root')
+            );
+        </script>
+        <style>
+            .marked {font-weight: bold}
+        </style>
+    </body>
+</html>
+
