@@ -65,7 +65,7 @@ If you happen to have [react-intl-ns](https://github.com/wrwrwr/react-intl-ns)
 installed you may use `m()` in place of `<FormattedMarkedMessage>`:
 
 ```js
-m`Hello |{name}|!|br|How are you today?`
+m`Hello |Winston|!|br|How are you today?`
 ```
 
 Installation and usage
