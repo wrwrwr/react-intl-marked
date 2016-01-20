@@ -9,6 +9,8 @@ import {FormattedMessage} from 'react-intl';
  * change markers or the wrapper generated.
  */
 export default class FormattedMarkedMessage extends FormattedMessage {
+    static displayName = 'FormattedMarkedMessage';
+
     // Text between markers is wrapped using mark().
     marker = '|';
 
