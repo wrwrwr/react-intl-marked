@@ -1,64 +1,70 @@
-var child = require('child_process');
-var minimist = require('minimist');
-var path = require('path');
-var process = require('process');
-var string = require('string-replace-webpack-plugin');
-var webpack = require('webpack');
+'use strict';
+
+const child = require('child_process');
+const path = require('path');
+const process = require('process');
+const string = require('string-replace-webpack-plugin');
+const webpack = require('webpack');
 
 // This configuration may be symlinked from a project, thus __dirname may
 // point to its physical location.
-var projectDir = process.cwd();
+let projectDir = process.cwd();
 
 // Global location of node modules (OS-specific).
-var globalModules = String(child.execSync('npm root -g')).trim();
-
-// What edition of the standard are we building for?
-var esEdition = minimist(process.argv.slice(2)).es || 5;
+let globalModules = String(child.execSync('npm root -g')).trim();
 
 // Some often-module-specific configuration can be done through package.json.
+let config;
 try {
     config = require(path.join(projectDir, 'package.json'));
 } catch (e) {
     config = {};
 }
 
+// What editions of the standard are we building for?
+let esEditions = config.webpackEsEditions || [5];
+
 // What file are we generating (relative path)?
-var target = config['main:es' + esEdition];
-var output = {
-    filename: path.basename(target),
-    path: path.join(projectDir, path.dirname(target)),
-    publicPath: path.dirname(target),
-};
-if (config.webpackLibrary) {
-    output.library = config.webpackLibrary;
-    output.libraryTarget = 'umd';
-}
+let outputs = esEditions.map(edition => {
+    var target = config['main:es' + edition];
+    var output = {
+        filename: path.basename(target),
+        path: path.join(projectDir, path.dirname(target)),
+        publicPath: path.dirname(target)
+    };
+    if (config.webpackLibrary) {
+        output.library = config.webpackLibrary;
+        output.libraryTarget = 'umd';
+    }
+    return output;
+});
 
 // Modules not to be bundled (to be loaded by the user).
-var externals = config.webpackExternals || {};
+let externals = config.webpackExternals || {};
 
 // What modules should Babel process?
-var babelDirs = config.webpackBabelDirs || [];
+let babelDirs = config.webpackBabelDirs || [];
 babelDirs.push(projectDir);
 
 // What should Babel transpile to? (Just ES5 is supported at the moment :-)
-var babelPresets;
-switch (esEdition) {
-    // Workaround: https://github.com/webpack/webpack/issues/1883.
-    case 5: babelPresets = ['es2015' /*-webpack2*/, 'stage-0', 'react']; break;
-    case 6: babelPresets = ['stage-0', 'react']; break;
-    case 7: babelPresets = ['react']; break;
-}
+let babelPresets = esEditions.map(edition => {
+    switch (edition) {
+        // WA: https://github.com/webpack/webpack/issues/1883.
+        case 5: return ['es2015' /*-webpack2*/, 'stage-0', 'react'];
+        case 6: return ['stage-0', 'react'];
+        case 7: return ['react'];
+    }
+});
 
 // A loader collapsing continuation lines.
-var contLines = string.replace({replacements: [
+let contLines = string.replace({replacements: [
     {pattern: /,\n/g, replacement: () => ', '}
 ]});
 
 
-module.exports = {
+module.exports = esEditions.map((edition, index) => ({
     entry: './main.jsx',
-    output: output,
+    output: outputs[index],
     externals: externals,
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -73,14 +79,14 @@ module.exports = {
                 test: /\.jsx?$/,
                 include: RegExp(babelDirs.join('|')),
                 loader: 'babel',
-                query: {presets: babelPresets}
+                query: {presets: babelPresets[index]}
             },
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css', 'sass']
             },
-            // Workaround: https://github.com/jtangelder/sass-loader/pull/196,
-            //             and https://github.com/sass/sass/issues/216.
+            // WA: https://github.com/jtangelder/sass-loader/pull/196,
+            //     and https://github.com/sass/sass/issues/216.
             {
                 test: /\.sass$/,
                 loaders: ['style', 'css', 'sass?indentedSyntax', contLines]
@@ -90,4 +96,4 @@ module.exports = {
     plugins: [
         new string()
     ]
-};
+}));

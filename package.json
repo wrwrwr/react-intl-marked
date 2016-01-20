@@ -5,7 +5,7 @@
     "author": "Wojtek Ruszczewski <react-intl-marked@wr.waw.pl>",
     "keywords": ["react", "react-intl", "react-intl-ns"],
     "scripts": {
-        "build": "webpack -p --es=5",
+        "build": "webpack -p",
         "test": "karma start && eslint . --ext=js --ext=jsx",
         "prepublish": "npm run build && npm test"
     },
@@ -41,6 +41,9 @@
             "root": "ReactIntlNs"
         }
     },
+    "webpackBabelDirs": [
+        "react-intl-ns"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/wrwrwr/react-intl-marked"
