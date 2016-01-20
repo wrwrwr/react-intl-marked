@@ -121,7 +121,7 @@ export default class FormattedMarkedMessage extends FormattedMessage {
 
 // Registers the marked message as a m() shortcut with react-intl-ns.
 try {
-    // Workaround: What is the ES7 way of handling optional imports?
+    // WA: What is the ES7 way of handling optional imports?
     const reactIntlNs = require('react-intl-ns');
     const {maybeEvaluateTemplate, registerIntlShortcut} = reactIntlNs;
     registerIntlShortcut('m', prefix => (...args) => {
