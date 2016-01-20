@@ -1,6 +1,6 @@
 {
     "name": "react-intl-marked",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Limited-structure message component for react-intl.",
     "author": "Wojtek Ruszczewski <react-intl-marked@wr.waw.pl>",
     "keywords": ["react", "react-intl", "react-intl-ns"],
@@ -9,7 +9,7 @@
         "test": "karma start && eslint . --ext=js --ext=jsx",
         "prepublish": "npm run build && npm test"
     },
-    "main": "main.jsx",
+    "main": "dist/main.es5.js",
     "main:es5": "dist/main.es5.js",
     "main:es6": "dist/main.es6.js",
     "main:es7:jsx": "main.jsx",
