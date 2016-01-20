@@ -14,7 +14,7 @@
         <script src="../dist/main.es5.js"></script>
         <script>
             var messages = {id: "Hello |{name}|!|br|How are you today?"};
-            var m = ReactIntlNs.intlShortcuts().m;
+            var m = ReactIntlMarked.markedShortcut();
             ReactDOM.render(
                 React.createElement(ReactIntl.IntlProvider,
                                     {locale: 'en', messages: messages},

@@ -62,11 +62,18 @@ Shortcut
 --------
 
 If you happen to have [react-intl-ns](https://github.com/wrwrwr/react-intl-ns)
-installed you may use `m()` in place of `<FormattedMarkedMessage>`:
+installed you may use a shortcut in place of `<FormattedMarkedMessage>`:
 
 ```js
+import {markedShortcut} from 'react-intl-marked';
+const m = markedShortcut();
+
 m`Hello |Winston|!|br|How are you today?`
 ```
+
+The shortcut factory may be given a namespace (a string) binding generated
+elements to the namespace (to be used in conjunction with `IntlNsProvider` and
+`IntlNamespace`).
 
 Installation and usage
 ----------------------

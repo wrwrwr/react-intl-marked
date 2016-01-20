@@ -134,10 +134,10 @@ describe("Extending", () => {
 
 
 describe("Integration", () => {
-    it("a shortcut is registered if react-intl-ns is available", function() {
+    it("a shortcut is exported if react-intl-ns is available", function() {
         try {
-            const {intlShortcuts} = require('react-intl-ns');
-            const {m} = intlShortcuts();
+            const {markedShortcut} = require('react-intl-marked');
+            const m = markedShortcut();
             renderToStaticMarkup(
                     <IntlProvider locale='en' messages={{id: 'm|br|m'}}>
                         {m`id`}
