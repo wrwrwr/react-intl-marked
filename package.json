@@ -1,6 +1,6 @@
 {
     "name": "react-intl-marked",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "description": "Limited-structure message component for react-intl.",
     "author": "Wojtek Ruszczewski <react-intl-marked@wr.waw.pl>",
     "keywords": ["react", "react-intl", "react-intl-ns"],
