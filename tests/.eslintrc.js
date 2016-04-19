@@ -18,14 +18,14 @@ module.exports = {
         'no-console': 0,
         // Magic numbers are fine in tests.
         'no-magic-numbers': 0,
+        'rapid7/static-magic-numbers': 0,
         // Mocha's undocumented this.skip().
         'no-invalid-this': 1,
         // Double quotes for human-readable strings.
         'quotes': [0, 'single'],
         // Usually there is just a single component created in a case.
         'react/display-name': 0,
-        // Personal preference of indenting JSX used as a function argument
-        // by 8 spaces, similarly to continuation lines).
-        'react/jsx-indent': 0
+        // Tests are written more for readiblity than performance.
+        'react/prefer-stateless-function': 0
     }
 };

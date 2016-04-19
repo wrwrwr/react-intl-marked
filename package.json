@@ -5,8 +5,8 @@
     "author": "Wojtek Ruszczewski <react-intl-marked@wr.waw.pl>",
     "keywords": ["react", "react-intl", "react-intl-ns"],
     "scripts": {
-        "build": "webpack -p",
-        "test": "karma start && eslint . --ext=js --ext=jsx",
+        "build": "webpack --env=p",
+        "test": "eslint . --ext=js --ext=jsx && karma start",
         "prepublish": "npm run build && npm test"
     },
     "main": "dist/main.es5.js",
@@ -14,36 +14,40 @@
     "main:es6": "dist/main.es6.js",
     "main:es7:jsx": "main.jsx",
     "peerDependencies": {
-        "react": "^0.14.6",
+        "react": "^0.14.7",
         "react-intl": "^2.0.0-beta-2"
     },
     "optionalDependencies": {
         "react-intl-ns": "^0.1.0"
     },
-    "webpackLibrary": "ReactIntlMarked",
-    "webpackExternals": {
-        "react": {
-            "amd": "react",
-            "commonjs": "react",
-            "commonjs2": "react",
-            "root": "React"
+    "webpack": {
+        "library": "ReactIntlMarked",
+        "externals": {
+            "react": {
+                "amd": "react",
+                "commonjs": "react",
+                "commonjs2": "react",
+                "root": "React"
+            },
+            "react-intl": {
+                "amd": "react-intl",
+                "commonjs": "react-intl",
+                "commonjs2": "react-intl",
+                "root": "ReactIntl"
+            },
+            "react-intl-ns": {
+                "amd": "react-intl-ns",
+                "commonjs": "react-intl-ns",
+                "commonjs2": "react-intl-ns",
+                "root": "ReactIntlNs"
+            }
         },
-        "react-intl": {
-            "amd": "react-intl",
-            "commonjs": "react-intl",
-            "commonjs2": "react-intl",
-            "root": "ReactIntl"
-        },
-        "react-intl-ns": {
-            "amd": "react-intl-ns",
-            "commonjs": "react-intl-ns",
-            "commonjs2": "react-intl-ns",
-            "root": "ReactIntlNs"
+        "babel": {
+            "dirs": [
+                "react-intl-ns"
+            ]
         }
     },
-    "webpackBabelDirs": [
-        "react-intl-ns"
-    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/wrwrwr/react-intl-marked"
