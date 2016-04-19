@@ -79,7 +79,7 @@ Installation and usage
 ----------------------
 
 ```bash
-npm install react react-intl@2.0.0-beta-2 react-intl-ns react-intl-marked
+npm install react react-intl react-intl-ns react-intl-marked
 ```
 
 ### Bundler and transpiler
